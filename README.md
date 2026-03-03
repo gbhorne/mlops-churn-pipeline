@@ -96,7 +96,7 @@ Upload trained model to GCS, register in Vertex AI Model Registry, deploy to end
 Codify all Phase 1-2 logic into 6 Kubeflow components. Compile pipeline YAML, submit to Vertex AI Pipelines. Conditional deploy-gate only triggers registration and deployment if AUC ≥ 0.75.
 **Phase 4-  Monitoring (Console + CLI)**
 Deploy model to endpoint, send prediction traffic, configure model monitoring with drift detection thresholds (0.3) on all features via gcloud CLI.
-**Phase 5-  Documentation + GitHub**
+**Phase 5 - Documentation**
 Package code, notebooks, docs, architecture diagram, and screenshots into portfolio-ready repository.
 ## Technologies
 Google Cloud Platform, Vertex AI Pipelines, Vertex AI Model Registry, Vertex AI Endpoints, Vertex AI Model Monitoring, BigQuery, Cloud Storage, Kubeflow Pipelines SDK (KFP v2), XGBoost, scikit-learn, Python 3.10, gcloud CLI
