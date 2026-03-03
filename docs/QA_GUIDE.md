@@ -1,4 +1,4 @@
-# MLOps Churn Pipeline Q&A Guide
+# MLOps Churn Pipeline Q&A
 
 ## System Design & Architecture
 
