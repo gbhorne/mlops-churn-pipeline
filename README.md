@@ -72,7 +72,6 @@ mlops-churn-pipeline/
 │   ├── 01_churn_exploration.ipynb  # Interactive EDA + model training
 │   └── 02_pipeline_build.ipynb     # Pipeline definition + submission
 ├──
-│   └── verify_build.sh             # Verification script for completed work
 ├── docs/
 │   ├── ARCHITECTURE.md
 │   ├── QA_GUIDE.md                 # Interview Q&A
