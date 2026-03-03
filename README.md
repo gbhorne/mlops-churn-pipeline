@@ -98,14 +98,10 @@ mlops-churn-pipeline/
 │   ├── 01_churn_exploration.ipynb  # Interactive EDA + model training
 │   └── 02_pipeline_build.ipynb     # Pipeline definition + submission
 ├── scripts/
-│   ├── setup.sh                    # Enable APIs, create resources
-│   ├── deploy.sh                   # Submit pipeline
-│   ├── teardown.sh                 # Full resource cleanup
 │   └── verify_build.sh             # Verification script for completed work
 ├── docs/
 │   ├── ARCHITECTURE.md
 │   ├── QA_GUIDE.md                 # Interview Q&A (architect-level)
-│   ├── COST_ANALYSIS.md
 │   └── architecture.svg            # System architecture diagram
 └── screenshots/                    # Console and notebook screenshots
     ├── 01_data_exploration.png
@@ -136,24 +132,12 @@ Deploy model to endpoint, send prediction traffic, configure model monitoring wi
 **Phase 5-  Documentation + GitHub**
 Package code, notebooks, docs, architecture diagram, and screenshots into portfolio-ready repository.
 
-## Cost Summary
-
-| Resource | Unit Cost | Usage | Total |
-|----------|-----------|-------|-------|
-| Pipeline runs | $0.03/run | ~10 runs | $0.30 |
-| Custom training | $0.10/hr | ~2 hours | $0.20 |
-| Endpoints | $0.10/hr | ~4 hours | $0.40 |
-| Workbench notebook | $0.07/hr | ~8 hours | $0.56 |
-| BigQuery | Free tier | < 1 TB processed | $0.00 |
-| Cloud Storage | $0.02/GB | < 1 GB | $0.01 |
-| **Total** | | | **~$1.50** |
-
 ## Technologies
 
 Google Cloud Platform, Vertex AI Pipelines, Vertex AI Model Registry, Vertex AI Endpoints, Vertex AI Model Monitoring, BigQuery, Cloud Storage, Kubeflow Pipelines SDK (KFP v2), XGBoost, scikit-learn, Python 3.10, gcloud CLI
 
 ## Related Projects
 
-- [enterprise-analytics](https://github.com/cloudmaster2026/enterprise-analytics)-  Enterprise data pipeline (source of retail dataset schema)
-- [bigquery-ml-retail-forecasting](https://github.com/cloudmaster2026/bigquery-ml-retail-forecasting)-  BQML demand forecasting
-- [adk-anomaly-detection](https://github.com/cloudmaster2026/adk-anomaly-detection)-  BQML anomaly detection
+- [enterprise-analytics](https://github.com/gbhorne/enterprise-analytics) - Enterprise data pipeline (source of retail dataset schema)
+- [bigquery-ml-retail-forecasting](https://github.com/gbhorne/bigquery-ml-retail-forecasting) - BQML demand forecasting
+- [adk-anomaly-detection](https://github.com/gbhorne/adk-anomaly-detection) - BQML anomaly detection

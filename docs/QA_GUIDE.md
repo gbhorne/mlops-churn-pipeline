@@ -1,4 +1,4 @@
-# MLOps Churn Pipeline-  Architect-Level Q&A Guide
+# MLOps Churn Pipeline Q&A Guide
 
 ## System Design & Architecture
 
@@ -6,9 +6,9 @@
 
 The pipeline follows a six-stage DAG pattern on Vertex AI: Extract → Feature Engineering → Train → Evaluate → Register → Deploy. Each stage is a containerized Kubeflow component running on managed infrastructure, which means no persistent compute-  resources spin up per step and tear down after. I chose this over a monolithic training script because each component is independently testable, swappable, and versioned. The feature engineering step could be replaced with a Feature Store pull without touching the training logic. The evaluation step gates deployment-  if AUC drops below 0.75, the pipeline stops. This prevents model regression from silently reaching production. The architecture separates the data layer (BigQuery), the orchestration layer (Vertex AI Pipelines), the model layer (Model Registry), and the serving layer (Endpoints). That separation means each layer can scale, fail, and be debugged independently.
 
-**Q: Why Vertex AI over SageMaker, or a self-managed Kubeflow cluster?**
+**Q: Why Vertex AI over a self-managed Kubeflow cluster?**
 
-Three reasons. First, managed infrastructure-  I don't want to operate a Kubernetes cluster just to run ML pipelines. Vertex AI abstracts the compute orchestration while still giving me the Kubeflow SDK for pipeline authoring, which is portable if I need to move later. Second, native integration with BigQuery and GCS-  the data already lives in BigQuery from the enterprise analytics project, so the extraction step is a single query rather than a cross-cloud data transfer. Third, the Model Registry and Endpoint deployment are first-class Vertex AI concepts, not bolted-on services. The alternative was self-managed Kubeflow on GKE, which gives more control but adds operational overhead that wasn't justified for this use case. If the model needed custom serving logic or GPU inference, I'd reconsider.
+Three reasons. First, managed infrastructure - I don't want to operate a Kubernetes cluster just to run ML pipelines. Vertex AI abstracts the compute orchestration while still giving me the Kubeflow SDK for pipeline authoring, which is portable if I need to move later. Second, native integration with BigQuery and GCS - the data already lives in BigQuery from the enterprise analytics project, so the extraction step is a single query rather than a cross-cloud data transfer. Third, the Model Registry and Endpoint deployment are first-class Vertex AI concepts, not bolted-on services. The alternative was self-managed Kubeflow on GKE, which gives more control but adds operational overhead that wasn't justified for this use case. If the model needed custom serving logic or GPU inference, I'd reconsider.
 
 **Q: How does the conditional deployment gate work, and why is it important?**
 
@@ -54,12 +54,8 @@ Every pipeline run creates a new version in the Vertex AI Model Registry. Each v
 
 Five things. First, a data validation step between extraction and feature engineering-  Great Expectations or TensorFlow Data Validation to catch schema changes, null spikes, or distribution anomalies before they reach the model. Second, automated hyperparameter tuning using Vertex AI's Vizier service instead of hardcoded parameters. Third, A/B testing infrastructure with traffic splitting on the endpoint. Fourth, a feedback loop-  capture actual churn outcomes and compare to predictions, computing model accuracy on real data rather than just the test split. Fifth, alerting and dashboarding-  Cloud Monitoring dashboards showing prediction latency, error rates, drift metrics, and pipeline success rates, with PagerDuty integration for critical failures.
 
-## Cost & Business Justification
-
-**Q: How did you manage costs during development?**
-
-The biggest cost risk is Vertex AI Endpoints-  $0.10/hour adds up if you forget to undeploy. My approach was deploy, test, screenshot, undeploy within the same session. I set phone timers as a safety net and built a teardown script that nukes all endpoints, models, notebooks, and storage in one command. Total project cost was under $2. The pipeline runs themselves cost pennies-  $0.03 per run for managed orchestration. The Workbench notebook was the second biggest cost at $0.07/hour, but I stopped it between sessions. The key insight is that MLOps development is bursty-  you need expensive resources for minutes, not hours. The teardown discipline is as important as the build discipline.
+## Business Justification
 
 **Q: What's the business case for investing in an MLOps pipeline versus running predictions in a notebook?**
 
-A notebook requires a human to run it, validate results, and manually deploy. That's a bottleneck-  the model gets stale between runs, there's no audit trail, and the human is a single point of failure. The pipeline runs on a schedule without intervention, automatically validates model quality before deployment, maintains a version history in the registry, and alerts when data drifts. The investment is maybe 40 hours of engineering time to build. The return is that the model stays current, deployments are safe, and the team doesn't need an ML engineer on-call to retrain. For a churn model specifically, even a 1% improvement in identifying at-risk customers can translate to significant revenue retention-  the pipeline ensures that improvement compounds over time rather than degrading.
+A notebook requires a human to run it, validate results, and manually deploy. That's a bottleneck - the model gets stale between runs, there's no audit trail, and the human is a single point of failure. The pipeline runs on a schedule without intervention, automatically validates model quality before deployment, maintains a version history in the registry, and alerts when data drifts. The investment is maybe 40 hours of engineering time to build. The return is that the model stays current, deployments are safe, and the team doesn't need an ML engineer on-call to retrain. For a churn model specifically, even a 1% improvement in identifying at-risk customers can translate to significant revenue retention - the pipeline ensures that improvement compounds over time rather than degrading.
