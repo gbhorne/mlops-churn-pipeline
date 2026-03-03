@@ -1,218 +1,182 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1300" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0f172a"/>
-      <stop offset="100%" style="stop-color:#1e293b"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/><stop offset="100%" style="stop-color:#1e293b"/>
     </linearGradient>
-    <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#3b82f6"/>
-      <stop offset="100%" style="stop-color:#2563eb"/>
-    </linearGradient>
-    <linearGradient id="gateGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#f59e0b"/>
-      <stop offset="100%" style="stop-color:#d97706"/>
-    </linearGradient>
-    <linearGradient id="deployGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#10b981"/>
-      <stop offset="100%" style="stop-color:#059669"/>
-    </linearGradient>
-    <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%">
-      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.3"/>
-    </filter>
-    <marker id="arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="8" orient="auto-start-reverse">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/>
-    </marker>
-    <marker id="arrowGreen" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="8" orient="auto-start-reverse">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
-    </marker>
-    <marker id="arrowRed" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="10" markerHeight="8" orient="auto-start-reverse">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
-    </marker>
+    <filter id="s"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.4"/></filter>
+    <marker id="a" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="9" markerHeight="7" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#64748b"/></marker>
+    <marker id="ag" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="9" markerHeight="7" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#10b981"/></marker>
+    <marker id="ar" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="9" markerHeight="7" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#ef4444"/></marker>
   </defs>
 
-  <!-- Background -->
-  <rect width="2000" height="1300" fill="url(#bgGrad)"/>
-  <g opacity="0.03">
-    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="white" stroke-width="0.5"/>
-    </pattern>
-    <rect width="2000" height="1300" fill="url(#grid)"/>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.04"><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0L0 0 0 40" fill="none" stroke="#fff" stroke-width=".5"/></pattern><rect width="1600" height="1000" fill="url(#g)"/></g>
+
+  <!-- ══════════════════════════════════════════ TITLE ══════════════════════════════════════════ -->
+  <text x="800" y="38" text-anchor="middle" fill="#f8fafc" font-size="26" font-weight="700">MLOps Churn Prediction Pipeline - Vertex AI</text>
+  <text x="800" y="62" text-anchor="middle" fill="#94a3b8" font-size="14">Extract → Engineer → Train → Evaluate → Gate → Register → Deploy → Monitor</text>
+
+  <!-- ══════════════════════════════════════════ DATA LAYER ══════════════════════════════════════════ -->
+  <text x="135" y="98" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700" letter-spacing="2">DATA LAYER</text>
+
+  <rect x="30" y="115" width="210" height="80" rx="10" fill="#1e3a5f" stroke="#06b6d4" stroke-width="2" filter="url(#s)"/>
+  <text x="135" y="143" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="700">BIGQUERY</text>
+  <text x="135" y="165" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="600">retail_gold</text>
+  <text x="135" y="185" text-anchor="middle" fill="#94a3b8" font-size="11">dim_customer · fct_daily_sales</text>
+
+  <line x1="135" y1="195" x2="135" y2="218" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+
+  <rect x="30" y="220" width="210" height="55" rx="10" fill="#1e3a5f" stroke="#06b6d4" stroke-width="1.5" filter="url(#s)"/>
+  <text x="135" y="244" text-anchor="middle" fill="#06b6d4" font-size="13" font-weight="700">FEATURE VIEW</text>
+  <text x="135" y="264" text-anchor="middle" fill="#94a3b8" font-size="11">v_customer_churn_features</text>
+
+  <rect x="30" y="295" width="210" height="70" rx="10" fill="#1e3a5f" stroke="#06b6d4" stroke-width="2" filter="url(#s)"/>
+  <text x="135" y="320" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="700">CLOUD STORAGE</text>
+  <text x="135" y="342" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">gs://mlops-project-489016</text>
+  <text x="135" y="358" text-anchor="middle" fill="#94a3b8" font-size="10">Pipeline artifacts · Model binaries</text>
+
+  <!-- ══════════════════════════════════════════ PIPELINE ══════════════════════════════════════════ -->
+  <text x="620" y="98" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700" letter-spacing="2">KUBEFLOW PIPELINE</text>
+
+  <rect x="290" y="108" width="660" height="600" rx="14" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="8,5"/>
+
+  <!-- 1. Extract -->
+  <rect x="320" y="130" width="200" height="65" rx="8" fill="#2563eb" filter="url(#s)"/>
+  <text x="420" y="157" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">1. Extract Data</text>
+  <text x="420" y="180" text-anchor="middle" fill="#bfdbfe" font-size="12">BigQuery → CSV</text>
+
+  <!-- 2. Feature -->
+  <rect x="560" y="130" width="200" height="65" rx="8" fill="#2563eb" filter="url(#s)"/>
+  <text x="660" y="157" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">2. Feature Eng.</text>
+  <text x="660" y="180" text-anchor="middle" fill="#bfdbfe" font-size="12">StandardScaler · 80/20 Split</text>
+
+  <!-- 3. Train -->
+  <rect x="320" y="235" width="200" height="65" rx="8" fill="#2563eb" filter="url(#s)"/>
+  <text x="420" y="262" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">3. Train Model</text>
+  <text x="420" y="285" text-anchor="middle" fill="#bfdbfe" font-size="12">XGBoost · 100 trees · .bst</text>
+
+  <!-- 4. Evaluate -->
+  <rect x="560" y="235" width="200" height="65" rx="8" fill="#2563eb" filter="url(#s)"/>
+  <text x="660" y="262" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">4. Evaluate Model</text>
+  <text x="660" y="285" text-anchor="middle" fill="#bfdbfe" font-size="12">AUC · Accuracy · F1</text>
+
+  <!-- Pipeline arrows -->
+  <line x1="520" y1="162" x2="558" y2="162" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="420" y1="195" x2="420" y2="233" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="660" y1="195" x2="660" y2="233" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="520" y1="268" x2="558" y2="268" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="620" y1="300" x2="570" y2="350" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- DEPLOY GATE -->
+  <g transform="translate(440,350)">
+    <polygon points="100,0 200,62 100,124 0,62" fill="#d97706" stroke="#f59e0b" stroke-width="3" filter="url(#s)"/>
+    <text x="100" y="48" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">DEPLOY</text>
+    <text x="100" y="70" text-anchor="middle" fill="#fff" font-size="18" font-weight="800">GATE</text>
+    <text x="100" y="98" text-anchor="middle" fill="#fef3c7" font-size="13" font-weight="600">AUC ≥ 0.75?</text>
   </g>
 
-  <!-- Title -->
-  <text x="1000" y="55" text-anchor="middle" fill="#f8fafc" font-size="32" font-weight="700" letter-spacing="0.5">MLOps Churn Prediction Pipeline - Vertex AI Architecture</text>
-  <text x="1000" y="88" text-anchor="middle" fill="#94a3b8" font-size="16">End-to-End ML Lifecycle: Extract → Engineer → Train → Evaluate → Gate → Register → Deploy → Monitor</text>
+  <!-- FAIL arrow + box -->
+  <line x1="640" y1="412" x2="720" y2="412" stroke="#ef4444" stroke-width="3" marker-end="url(#ar)"/>
+  <rect x="725" y="390" width="170" height="48" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="2"/>
+  <text x="810" y="411" text-anchor="middle" fill="#fca5a5" font-size="13" font-weight="700">FAIL → Pipeline</text>
+  <text x="810" y="429" text-anchor="middle" fill="#fca5a5" font-size="13" font-weight="700">ends. No deploy.</text>
 
-  <!-- ═══════ DATA LAYER (Left) ═══════ -->
-  <text x="180" y="140" text-anchor="middle" fill="#94a3b8" font-size="15" font-weight="600" letter-spacing="2">DATA LAYER</text>
+  <!-- PASS arrow -->
+  <line x1="540" y1="474" x2="510" y2="520" stroke="#10b981" stroke-width="3" marker-end="url(#ag)"/>
+  <text x="490" y="510" text-anchor="middle" fill="#10b981" font-size="14" font-weight="800">✓ PASS</text>
 
-  <!-- BigQuery -->
-  <rect x="50" y="165" width="260" height="95" rx="10" fill="#1e3a5f" stroke="#06b6d4" stroke-width="2" filter="url(#shadow)"/>
-  <text x="180" y="198" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="600">BIGQUERY</text>
-  <text x="180" y="222" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="500">retail_gold</text>
-  <text x="180" y="245" text-anchor="middle" fill="#94a3b8" font-size="12">dim_customer  ·  fct_daily_sales</text>
+  <!-- 5. Register -->
+  <rect x="350" y="535" width="200" height="65" rx="8" fill="#059669" filter="url(#s)"/>
+  <text x="450" y="562" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">5. Register Model</text>
+  <text x="450" y="585" text-anchor="middle" fill="#d1fae5" font-size="12">Model Registry · Versioned</text>
 
-  <!-- Feature View -->
-  <rect x="50" y="285" width="260" height="65" rx="10" fill="#1e3a5f" stroke="#06b6d4" stroke-width="1.5" opacity="0.8" filter="url(#shadow)"/>
-  <text x="180" y="313" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="600">FEATURE VIEW</text>
-  <text x="180" y="336" text-anchor="middle" fill="#94a3b8" font-size="12">v_customer_churn_features</text>
+  <!-- 6. Deploy -->
+  <rect x="590" y="535" width="200" height="65" rx="8" fill="#059669" filter="url(#s)"/>
+  <text x="690" y="562" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">6. Deploy Endpoint</text>
+  <text x="690" y="585" text-anchor="middle" fill="#d1fae5" font-size="12">HTTPS · n1-standard-2</text>
 
-  <!-- Cloud Storage -->
-  <rect x="50" y="375" width="260" height="80" rx="10" fill="#1e3a5f" stroke="#06b6d4" stroke-width="2" filter="url(#shadow)"/>
-  <text x="180" y="405" text-anchor="middle" fill="#06b6d4" font-size="14" font-weight="600">CLOUD STORAGE</text>
-  <text x="180" y="428" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="500">gs://mlops-project-489016</text>
-  <text x="180" y="447" text-anchor="middle" fill="#94a3b8" font-size="12">Pipeline artifacts  ·  Model binaries</text>
+  <line x1="550" y1="567" x2="588" y2="567" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
 
-  <!-- Arrow BQ → Feature View -->
-  <line x1="180" y1="260" x2="180" y2="285" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Metrics -->
+  <rect x="330" y="630" width="490" height="65" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#s)"/>
+  <text x="575" y="650" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">MODEL METRICS</text>
+  <text x="400" y="680" text-anchor="middle" fill="#10b981" font-size="28" font-weight="800">0.8883</text>
+  <text x="510" y="680" text-anchor="middle" fill="#60a5fa" font-size="28" font-weight="800">0.80</text>
+  <text x="620" y="680" text-anchor="middle" fill="#a78bfa" font-size="28" font-weight="800">0.79</text>
+  <text x="730" y="680" text-anchor="middle" fill="#f472b6" font-size="28" font-weight="800">0.79</text>
+  <text x="400" y="695" text-anchor="middle" fill="#94a3b8" font-size="10">AUC-ROC</text>
+  <text x="510" y="695" text-anchor="middle" fill="#94a3b8" font-size="10">Accuracy</text>
+  <text x="620" y="695" text-anchor="middle" fill="#94a3b8" font-size="10">Precision</text>
+  <text x="730" y="695" text-anchor="middle" fill="#94a3b8" font-size="10">F1 Score</text>
 
-  <!-- ═══════ PIPELINE LAYER (Center) ═══════ -->
-  <text x="850" y="140" text-anchor="middle" fill="#94a3b8" font-size="15" font-weight="600" letter-spacing="2">KUBEFLOW PIPELINE - VERTEX AI PIPELINES</text>
+  <!-- Data → Pipeline -->
+  <line x1="240" y1="155" x2="318" y2="155" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
 
-  <!-- Pipeline container -->
-  <rect x="400" y="155" width="900" height="790" rx="14" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <!-- ══════════════════════════════════════════ SERVING LAYER ══════════════════════════════════════════ -->
+  <text x="1340" y="98" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700" letter-spacing="2">SERVING LAYER</text>
 
-  <!-- Step 1: Extract Data -->
-  <rect x="460" y="190" width="240" height="75" rx="8" fill="url(#pipeGrad)" filter="url(#shadow)"/>
-  <text x="580" y="222" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">1. Extract Data</text>
-  <text x="580" y="246" text-anchor="middle" fill="#bfdbfe" font-size="13">BigQuery → CSV</text>
+  <rect x="1100" y="120" width="280" height="80" rx="10" fill="#1a3326" stroke="#10b981" stroke-width="2" filter="url(#s)"/>
+  <text x="1240" y="148" text-anchor="middle" fill="#10b981" font-size="14" font-weight="700">MODEL REGISTRY</text>
+  <text x="1240" y="170" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">churn-prediction-pipeline</text>
+  <text x="1240" y="190" text-anchor="middle" fill="#94a3b8" font-size="11">XGBoost v3 · .bst format</text>
 
-  <!-- Step 2: Feature Engineering -->
-  <rect x="760" y="190" width="240" height="75" rx="8" fill="url(#pipeGrad)" filter="url(#shadow)"/>
-  <text x="880" y="222" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">2. Feature Eng.</text>
-  <text x="880" y="246" text-anchor="middle" fill="#bfdbfe" font-size="13">StandardScaler  ·  80/20 Split</text>
+  <line x1="1240" y1="200" x2="1240" y2="222" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
 
-  <!-- Step 3: Train Model -->
-  <rect x="460" y="310" width="240" height="75" rx="8" fill="url(#pipeGrad)" filter="url(#shadow)"/>
-  <text x="580" y="342" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">3. Train Model</text>
-  <text x="580" y="366" text-anchor="middle" fill="#bfdbfe" font-size="13">XGBoost  ·  100 trees  ·  .bst</text>
+  <rect x="1100" y="225" width="280" height="80" rx="10" fill="#1a3326" stroke="#10b981" stroke-width="2" filter="url(#s)"/>
+  <text x="1240" y="253" text-anchor="middle" fill="#10b981" font-size="14" font-weight="700">PREDICTION ENDPOINT</text>
+  <text x="1240" y="275" text-anchor="middle" fill="#e2e8f0" font-size="14" font-weight="600">churn-monitoring-endpoint</text>
+  <text x="1240" y="295" text-anchor="middle" fill="#94a3b8" font-size="11">HTTPS · Real-time · n1-standard-2</text>
 
-  <!-- Step 4: Evaluate Model -->
-  <rect x="760" y="310" width="240" height="75" rx="8" fill="url(#pipeGrad)" filter="url(#shadow)"/>
-  <text x="880" y="342" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">4. Evaluate Model</text>
-  <text x="880" y="366" text-anchor="middle" fill="#bfdbfe" font-size="13">AUC  ·  Accuracy  ·  F1</text>
+  <line x1="1240" y1="305" x2="1240" y2="328" stroke="#64748b" stroke-width="2" marker-end="url(#a)"/>
 
-  <!-- Deployment Gate (Diamond) -->
-  <g transform="translate(610, 450)">
-    <polygon points="120,0 240,75 120,150 0,75" fill="url(#gateGrad)" stroke="#f59e0b" stroke-width="2.5" filter="url(#shadow)"/>
-    <text x="120" y="62" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">DEPLOY</text>
-    <text x="120" y="84" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">GATE</text>
-    <text x="120" y="112" text-anchor="middle" fill="#fef3c7" font-size="14">AUC ≥ 0.75?</text>
-  </g>
-
-  <!-- FAIL box -->
-  <rect x="950" y="490" width="180" height="55" rx="6" fill="#7f1d1d" stroke="#ef4444" stroke-width="1.5"/>
-  <text x="1040" y="514" text-anchor="middle" fill="#fca5a5" font-size="14" font-weight="600">FAIL → Pipeline</text>
-  <text x="1040" y="534" text-anchor="middle" fill="#fca5a5" font-size="14" font-weight="600">ends. No deploy.</text>
-
-  <!-- PASS label -->
-  <text x="680" y="645" text-anchor="middle" fill="#10b981" font-size="16" font-weight="700">✓ PASS</text>
-
-  <!-- Step 5: Register Model -->
-  <rect x="490" y="670" width="240" height="75" rx="8" fill="url(#deployGrad)" filter="url(#shadow)"/>
-  <text x="610" y="702" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">5. Register Model</text>
-  <text x="610" y="726" text-anchor="middle" fill="#d1fae5" font-size="13">Model Registry  ·  Versioned</text>
-
-  <!-- Step 6: Deploy to Endpoint -->
-  <rect x="790" y="670" width="240" height="75" rx="8" fill="url(#deployGrad)" filter="url(#shadow)"/>
-  <text x="910" y="702" text-anchor="middle" fill="#fff" font-size="16" font-weight="600">6. Deploy Endpoint</text>
-  <text x="910" y="726" text-anchor="middle" fill="#d1fae5" font-size="13">HTTPS  ·  n1-standard-2</text>
-
-  <!-- Metrics box -->
-  <rect x="480" y="795" width="560" height="110" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="760" y="825" text-anchor="middle" fill="#94a3b8" font-size="14" font-weight="600">MODEL METRICS (v1)</text>
-  <text x="560" y="865" text-anchor="middle" fill="#10b981" font-size="30" font-weight="700">0.8883</text>
-  <text x="560" y="890" text-anchor="middle" fill="#94a3b8" font-size="12">AUC-ROC</text>
-  <text x="680" y="865" text-anchor="middle" fill="#60a5fa" font-size="30" font-weight="700">0.80</text>
-  <text x="680" y="890" text-anchor="middle" fill="#94a3b8" font-size="12">Accuracy</text>
-  <text x="800" y="865" text-anchor="middle" fill="#a78bfa" font-size="30" font-weight="700">0.79</text>
-  <text x="800" y="890" text-anchor="middle" fill="#94a3b8" font-size="12">Precision</text>
-  <text x="940" y="865" text-anchor="middle" fill="#f472b6" font-size="30" font-weight="700">0.79</text>
-  <text x="940" y="890" text-anchor="middle" fill="#94a3b8" font-size="12">F1 Score</text>
-
-  <!-- ═══════ SERVING LAYER (Right) ═══════ -->
-  <text x="1650" y="140" text-anchor="middle" fill="#94a3b8" font-size="15" font-weight="600" letter-spacing="2">SERVING LAYER</text>
-
-  <!-- Model Registry -->
-  <rect x="1500" y="175" width="300" height="90" rx="10" fill="#1a3326" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
-  <text x="1650" y="205" text-anchor="middle" fill="#10b981" font-size="14" font-weight="600">MODEL REGISTRY</text>
-  <text x="1650" y="230" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="500">churn-prediction-pipeline</text>
-  <text x="1650" y="252" text-anchor="middle" fill="#94a3b8" font-size="12">XGBoost v3  ·  .bst format</text>
-
-  <!-- Endpoint -->
-  <rect x="1500" y="295" width="300" height="90" rx="10" fill="#1a3326" stroke="#10b981" stroke-width="2" filter="url(#shadow)"/>
-  <text x="1650" y="325" text-anchor="middle" fill="#10b981" font-size="14" font-weight="600">PREDICTION ENDPOINT</text>
-  <text x="1650" y="350" text-anchor="middle" fill="#e2e8f0" font-size="15" font-weight="500">churn-monitoring-endpoint</text>
-  <text x="1650" y="372" text-anchor="middle" fill="#94a3b8" font-size="12">HTTPS  ·  Real-time  ·  n1-standard-2</text>
-
-  <!-- Prediction Examples -->
-  <rect x="1500" y="420" width="300" height="120" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="1650" y="448" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="600">LIVE PREDICTION RESULTS</text>
-  <text x="1525" y="478" fill="#10b981" font-size="14">High-value:</text>
-  <text x="1775" y="478" text-anchor="end" fill="#10b981" font-size="14" font-weight="600">25.1% → ACTIVE</text>
-  <text x="1525" y="502" fill="#ef4444" font-size="14">At-risk:</text>
-  <text x="1775" y="502" text-anchor="end" fill="#ef4444" font-size="14" font-weight="600">98.5% → CHURN</text>
-  <text x="1525" y="526" fill="#60a5fa" font-size="14">Medium:</text>
-  <text x="1775" y="526" text-anchor="end" fill="#60a5fa" font-size="14" font-weight="600">20.7% → ACTIVE</text>
+  <!-- Predictions -->
+  <rect x="1100" y="330" width="280" height="110" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#s)"/>
+  <text x="1240" y="355" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">LIVE PREDICTION RESULTS</text>
+  <text x="1125" y="383" fill="#10b981" font-size="14" font-weight="600">High-value:</text>
+  <text x="1355" y="383" text-anchor="end" fill="#10b981" font-size="14" font-weight="700">25.1% → ACTIVE</text>
+  <text x="1125" y="407" fill="#ef4444" font-size="14" font-weight="600">At-risk:</text>
+  <text x="1355" y="407" text-anchor="end" fill="#ef4444" font-size="14" font-weight="700">98.5% → CHURN</text>
+  <text x="1125" y="431" fill="#60a5fa" font-size="14" font-weight="600">Medium:</text>
+  <text x="1355" y="431" text-anchor="end" fill="#60a5fa" font-size="14" font-weight="700">20.7% → ACTIVE</text>
 
   <!-- Monitoring -->
-  <text x="1650" y="575" text-anchor="middle" fill="#94a3b8" font-size="15" font-weight="600" letter-spacing="2">MONITORING</text>
-  <rect x="1500" y="595" width="300" height="110" rx="10" fill="#2d1b4e" stroke="#8b5cf6" stroke-width="2" filter="url(#shadow)"/>
-  <text x="1650" y="625" text-anchor="middle" fill="#8b5cf6" font-size="14" font-weight="600">DRIFT DETECTION</text>
-  <text x="1650" y="652" text-anchor="middle" fill="#e2e8f0" font-size="14">Prediction Drift Monitor</text>
-  <text x="1650" y="676" text-anchor="middle" fill="#94a3b8" font-size="12">Threshold: 0.3  ·  Hourly  ·  8 features</text>
-  <text x="1650" y="696" text-anchor="middle" fill="#c4b5fd" font-size="12">Email alerts on drift</text>
+  <text x="1240" y="470" text-anchor="middle" fill="#94a3b8" font-size="13" font-weight="700" letter-spacing="2">MONITORING</text>
+  <line x1="1240" y1="440" x2="1240" y2="478" stroke="#8b5cf6" stroke-width="2" marker-end="url(#a)"/>
 
-  <!-- ═══════ ARROWS ═══════ -->
-  <!-- Data → Pipeline -->
-  <line x1="310" y1="210" x2="460" y2="210" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="1100" y="485" width="280" height="100" rx="10" fill="#2d1b4e" stroke="#8b5cf6" stroke-width="2" filter="url(#s)"/>
+  <text x="1240" y="513" text-anchor="middle" fill="#8b5cf6" font-size="14" font-weight="700">DRIFT DETECTION</text>
+  <text x="1240" y="537" text-anchor="middle" fill="#e2e8f0" font-size="13" font-weight="600">Prediction Drift Monitor</text>
+  <text x="1240" y="558" text-anchor="middle" fill="#94a3b8" font-size="11">Threshold: 0.3 · Hourly · 8 features</text>
+  <text x="1240" y="576" text-anchor="middle" fill="#c4b5fd" font-size="11">Email alerts on drift</text>
 
-  <!-- Pipeline internal -->
-  <line x1="700" y1="228" x2="760" y2="228" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-  <line x1="580" y1="265" x2="580" y2="310" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-  <line x1="880" y1="265" x2="880" y2="310" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-  <line x1="700" y1="348" x2="760" y2="348" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Pipeline → Serving dashed -->
+  <line x1="790" y1="567" x2="1098" y2="270" stroke="#10b981" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#ag)"/>
 
-  <!-- Evaluate → Gate -->
-  <line x1="820" y1="385" x2="770" y2="450" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- ══════════════════════════════════════════ INFO BOXES ══════════════════════════════════════════ -->
+  <rect x="30" y="400" width="210" height="210" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#s)"/>
+  <text x="135" y="425" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="700">8 INPUT FEATURES</text>
+  <text x="48" y="452" fill="#e2e8f0" font-size="12">purchase_frequency</text>
+  <text x="195" y="452" fill="#475569" font-size="10">★ top</text>
+  <text x="48" y="474" fill="#94a3b8" font-size="12">total_spend</text>
+  <text x="48" y="496" fill="#94a3b8" font-size="12">avg_order_value</text>
+  <text x="48" y="518" fill="#94a3b8" font-size="12">unique_products_bought</text>
+  <text x="48" y="540" fill="#94a3b8" font-size="12">spend_variability</text>
+  <text x="48" y="562" fill="#94a3b8" font-size="12">customer_tenure_days</text>
+  <text x="48" y="584" fill="#94a3b8" font-size="12">unique_categories</text>
+  <text x="48" y="600" fill="#94a3b8" font-size="12">regions_purchased_from</text>
 
-  <!-- Gate → PASS -->
-  <line x1="700" y1="600" x2="660" y2="670" stroke="#10b981" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
-
-  <!-- Gate → FAIL -->
-  <line x1="850" y1="525" x2="950" y2="517" stroke="#ef4444" stroke-width="2.5" marker-end="url(#arrowRed)"/>
-
-  <!-- Register → Deploy -->
-  <line x1="730" y1="707" x2="790" y2="707" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-
-  <!-- Pipeline → Serving -->
-  <line x1="1030" y1="707" x2="1500" y2="350" stroke="#10b981" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrowGreen)"/>
-
-  <!-- Endpoint → Predictions → Monitoring -->
-  <line x1="1650" y1="385" x2="1650" y2="420" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
-  <line x1="1650" y1="540" x2="1650" y2="595" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow)"/>
-
-  <!-- ═══════ INFO BOXES (Bottom Left) ═══════ -->
-  <rect x="50" y="500" width="260" height="190" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="180" y="530" text-anchor="middle" fill="#60a5fa" font-size="14" font-weight="600">8 INPUT FEATURES</text>
-  <text x="72" y="558" fill="#94a3b8" font-size="13">purchase_frequency</text>
-  <text x="230" y="558" fill="#64748b" font-size="11">★ dominant</text>
-  <text x="72" y="580" fill="#94a3b8" font-size="13">total_spend</text>
-  <text x="72" y="602" fill="#94a3b8" font-size="13">avg_order_value</text>
-  <text x="72" y="624" fill="#94a3b8" font-size="13">unique_products_bought</text>
-  <text x="72" y="646" fill="#94a3b8" font-size="13">spend_variability</text>
-  <text x="72" y="668" fill="#94a3b8" font-size="13">customer_tenure_days</text>
-
-  <rect x="50" y="715" width="260" height="185" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
-  <text x="180" y="745" text-anchor="middle" fill="#f59e0b" font-size="14" font-weight="600">TECH STACK</text>
-  <text x="72" y="775" fill="#94a3b8" font-size="13">Vertex AI Pipelines</text>
-  <text x="72" y="797" fill="#94a3b8" font-size="13">Kubeflow SDK (KFP v2)</text>
-  <text x="72" y="819" fill="#94a3b8" font-size="13">XGBoost  ·  scikit-learn</text>
-  <text x="72" y="841" fill="#94a3b8" font-size="13">BigQuery  ·  Cloud Storage</text>
-  <text x="72" y="863" fill="#94a3b8" font-size="13">Model Registry  ·  Endpoints</text>
-  <text x="72" y="885" fill="#94a3b8" font-size="13">gcloud CLI  ·  Python 3.10</text>
+  <rect x="30" y="630" width="210" height="190" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" filter="url(#s)"/>
+  <text x="135" y="655" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="700">TECH STACK</text>
+  <text x="48" y="682" fill="#94a3b8" font-size="12">Vertex AI Pipelines</text>
+  <text x="48" y="704" fill="#94a3b8" font-size="12">Kubeflow SDK (KFP v2)</text>
+  <text x="48" y="726" fill="#94a3b8" font-size="12">XGBoost · scikit-learn</text>
+  <text x="48" y="748" fill="#94a3b8" font-size="12">BigQuery · Cloud Storage</text>
+  <text x="48" y="770" fill="#94a3b8" font-size="12">Model Registry · Endpoints</text>
+  <text x="48" y="792" fill="#94a3b8" font-size="12">gcloud CLI · Python 3.10</text>
 
   <!-- Footer -->
-  <rect x="0" y="1265" width="2000" height="35" fill="#0f172a" opacity="0.8"/>
-  <text x="1000" y="1288" text-anchor="middle" fill="#475569" font-size="14">MLOps Churn Prediction Pipeline  ·  Vertex AI  ·  Built March 2026</text>
+  <rect x="0" y="970" width="1600" height="30" fill="#0c1322"/>
+  <text x="800" y="990" text-anchor="middle" fill="#475569" font-size="12">MLOps Churn Prediction Pipeline · Vertex AI · Built March 2026</text>
 </svg>

@@ -4,7 +4,7 @@ An end-to-end MLOps pipeline on Google Cloud Vertex AI that automates customer c
 Most ML portfolio projects stop at model training in a notebook. This project goes further-  it codifies the entire ML lifecycle into a repeatable, automated Kubeflow pipeline that runs on managed infrastructure. The pipeline is the production system, not a handoff artifact.
 **What it proves:** Kubeflow Pipelines orchestration, Vertex AI custom training, model versioning and registry, automated deployment gates (only deploy if AUC > 0.75), real-time endpoint serving, and data drift monitoring.
 ## Architecture Overview
-![Architecture Diagram](docs/architecture.png)
+![Architecture Diagram](docs/architecture.svg)
 The system follows a six-stage pipeline pattern: Extract → Engineer → Train → Evaluate → Register → Deploy, with a conditional gate between evaluation and registration that prevents underperforming models from reaching production.
 **Infrastructure:** Google Cloud Platform (Vertex AI, BigQuery, Cloud Storage, Artifact Registry)
 **ML Framework:** XGBoost binary classifier with StandardScaler preprocessing
@@ -75,7 +75,7 @@ mlops-churn-pipeline/
 ├── docs/
 │   ├── ARCHITECTURE.md
 │   ├── QA_GUIDE.md                 # Interview Q&A
-│   └── architecture.png            # System architecture diagram
+│   └── architecture.svg            # System architecture diagram
 └── screenshots/                    # Console and notebook screenshots
     ├── 01_data_exploration.png
     ├── 02_feature_distributions.png
